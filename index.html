@@ -57,7 +57,7 @@
     display:flex;
     align-items:baseline;
     width:100%;
-    gap:clamp(6px,1vw,14px);
+    gap:clamp(3px,1vw,7px);
     text-decoration:none;
     color:var(--ink);
   }
@@ -86,6 +86,7 @@
     text-transform:uppercase;
     letter-spacing:.12em;
     margin-top:14px;
+    text-align:center;
   }
 
   /* ---------- HERO ---------- */
@@ -249,23 +250,9 @@
     display:flex;
     flex-wrap:wrap;
     align-items:center;
+    justify-content:center;
     gap:14px;
   }
-  .about-chip{
-    display:flex;
-    align-items:center;
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:999px;
-    padding:12px 22px;
-    text-decoration:none;
-    color:var(--ink);
-    font-family:var(--f-display);
-    font-weight:600;
-    font-size:15px;
-    transition:border-color .2s ease, transform .2s ease;
-  }
-  .about-chip:hover{ border-color:var(--ink); transform:translateY(-2px); }
 
   .icon-btn{
     width:44px; height:44px;
@@ -275,15 +262,106 @@
     display:flex; align-items:center; justify-content:center;
     text-decoration:none;
     transition:transform .2s ease, border-color .2s ease, background .2s ease;
+    cursor:pointer;
+    padding:0;
   }
   .icon-btn svg{ width:19px; height:19px; transition:fill .2s ease; }
   .icon-btn:hover{ transform:translateY(-2px); border-color:var(--ink); }
+  .icon-btn.pr:hover{ background:var(--sindoor); }
+  .icon-btn.pr:hover svg{ fill:#fff; }
   .icon-btn.gh:hover{ background:var(--peacock); }
   .icon-btn.gh:hover svg{ fill:#fff; }
   .icon-btn.li:hover{ background:#0A5C8A; }
   .icon-btn.li:hover svg{ fill:#fff; }
   .icon-btn.x:hover{ background:var(--ink); }
   .icon-btn.x:hover svg{ fill:#fff; }
+  .icon-btn.mail svg{ width:22px; height:22px; }
+  .icon-btn.mail:hover{ background:var(--turmeric); }
+  .icon-btn.mail:hover svg{ fill:var(--ink); }
+
+  .formkit-powered-by-convertkit-container,
+  .formkit-powered-by-convertkit,
+  .formkit-powered-by-kit,
+  [data-element="powered-by"],
+  .formkit-powered-by { 
+    display: none !important; 
+  }
+  .formkit-spinner { display: none !important; }
+
+  /* ---------- DIALOG ---------- */
+  dialog{
+    padding:0;
+    border:2px solid var(--ink);
+    border-radius:14px;
+    background:var(--card);
+    box-shadow:8px 8px 0 var(--line);
+    max-width:380px;
+    width:90%;
+    color:var(--ink);
+    font-family:var(--f-body);
+  }
+  dialog::backdrop{
+    background:rgba(36,27,18,0.4);
+    backdrop-filter:blur(4px);
+  }
+  .modal-content{
+    padding:32px;
+    position:relative;
+  }
+  .modal-close{
+    position:absolute;
+    top:16px; right:16px;
+    background:transparent;
+    border:none;
+    font-size:24px;
+    cursor:pointer;
+    color:var(--ink-soft);
+    line-height:1;
+    padding:4px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .modal-close:hover{ color:var(--ink); }
+  .modal-title{
+    font-family:var(--f-display);
+    font-weight:700;
+    font-size:24px;
+    margin:0 0 12px;
+  }
+  .modal-desc{
+    font-size:15px;
+    color:var(--ink-soft);
+    line-height:1.5;
+    margin:0 0 24px;
+  }
+  .modal-form{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .modal-input{
+    padding:12px 16px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    background:var(--parchment);
+    font-family:var(--f-body);
+    font-size:15px;
+    color:var(--ink);
+    outline:none;
+  }
+  .modal-input:focus{ border-color:var(--ink); }
+  .modal-submit{
+    background:var(--ink);
+    color:var(--parchment);
+    border:none;
+    border-radius:8px;
+    padding:12px;
+    font-family:var(--f-display);
+    font-weight:600;
+    font-size:15px;
+    cursor:pointer;
+    transition:background .2s ease;
+  }
+  .modal-submit:hover{ background:var(--peacock); }
 
   /* ---------- FOOTER ---------- */
   footer{
@@ -291,7 +369,7 @@
     padding:22px clamp(20px,5vw,56px) 34px;
     border-top:1px solid var(--line);
     display:flex; flex-wrap:wrap; gap:8px;
-    justify-content:space-between;
+    justify-content:center;
     font-family:var(--f-mono);
     font-size:11.5px;
     color:var(--ink-soft);
@@ -350,22 +428,27 @@
 </section>
 
 <section class="connect">
-  <p class="eyebrow">Connect</p>
   <div class="connect-row">
 
-    <a href="/about" class="about-chip">priyanshu</a>
+    <a class="icon-btn pr" href="/about" aria-label="About Priyanshu">
+      <svg viewBox="0 0 24 24" fill="var(--ink)"><path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-3.328 0-10 1.674-10 5v3h20v-3c0-3.326-6.672-5-10-5z"/></svg>
+    </a>
 
     <a class="icon-btn gh" href="https://github.com/if-else-repeat" target="_blank" rel="noopener" aria-label="GitHub">
       <svg viewBox="0 0 24 24" fill="var(--ink)"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.838 1.237 1.838 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.303-5.467-1.334-5.467-5.93 0-1.31.468-2.38 1.235-3.22-.123-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.5 11.5 0 013.003-.404c1.02.005 2.047.138 3.003.404 2.29-1.552 3.297-1.23 3.297-1.23.653 1.653.24 2.873.118 3.176.77.84 1.233 1.91 1.233 3.22 0 4.61-2.807 5.624-5.48 5.92.43.372.814 1.103.814 2.222 0 1.604-.015 2.896-.015 3.29 0 .32.216.694.825.576C20.565 21.795 24 17.297 24 12c0-6.63-5.37-12-12-12z"/></svg>
+    </a>
+
+    <a class="icon-btn x" href="https://x.com/if_else_repeat" target="_blank" rel="noopener" aria-label="X (Twitter)">
+      <svg viewBox="0 0 24 24" fill="var(--ink)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
     </a>
 
     <a class="icon-btn li" href="https://www.linkedin.com/in/priyanshu-raj-mishra" target="_blank" rel="noopener" aria-label="LinkedIn">
       <svg viewBox="0 0 24 24" fill="var(--ink)"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 11.001-4.125 2.062 2.062 0 01-.001 4.125zM7.119 20.452H3.554V9h3.565v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
     </a>
 
-    <a class="icon-btn x" href="https://x.com/if_else_repeat" target="_blank" rel="noopener" aria-label="X (Twitter)">
-      <svg viewBox="0 0 24 24" fill="var(--ink)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-    </a>
+    <button class="icon-btn mail" aria-label="Newsletter" onclick="document.getElementById('nl-modal').showModal()">
+      <svg viewBox="0 0 24 24" fill="var(--ink)"><path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 18H4V8L12 13L20 8V18ZM12 11L4 6H20L12 11Z"/></svg>
+    </button>
 
   </div>
 </section>
@@ -373,6 +456,25 @@
 <footer>
   <span>© 2026 OLDMILL</span>
 </footer>
+
+<dialog id="nl-modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="document.getElementById('nl-modal').close()" aria-label="Close">×</button>
+    <h2 class="modal-title">Stay in the loop</h2>
+    <p class="modal-desc">Subscribe to get updates on new projects, essays, and experiments.</p>
+    <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
+    <form action="https://app.kit.com/forms/9707749/subscriptions" class="modal-form seva-form formkit-form" method="post" data-sv-form="9707749" data-uid="8f897cb2ce" data-format="inline" data-version="5" data-options="{\"settings\":{\"after_subscribe\":{\"action\":\"message\",\"success_message\":\"Success! Now check your email to confirm your subscription.\",\"redirect_url\":\"\"},\"powered_by\":{\"show\":false}}}">
+      <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert" style="color:var(--sindoor); font-size:14px; margin:0 0 12px; padding:0; list-style:none;"></ul>
+      <div data-element="fields" style="display:flex; flex-direction:column; gap:12px;">
+        <input class="modal-input formkit-input" name="email_address" aria-label="Email Address" placeholder="Your email address" required="" type="email">
+        <button data-element="submit" class="modal-submit formkit-submit">
+          <span>Subscribe</span>
+        </button>
+      </div>
+    </form>
+
+  </div>
+</dialog>
 
 <script>
   function fitWordmark(){
