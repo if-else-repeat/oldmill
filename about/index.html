@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>priyanshu — OLDMILL.in</title>
+<meta name="description" content="priyanshu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:wght@400..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#F4ECD8; --card:#F8F2E2;
+    --ink:#241B12; --ink-soft:#5C4E3B;
+    --saffron:#DD6B12; --peacock:#0E6659; --sindoor:#AE3B26;
+    --gold:#B4841C; --turmeric:#EFB80B;
+    --line: rgba(36,27,18,0.16);
+    --f-display:'Bricolage Grotesque', sans-serif;
+    --f-body:'Instrument Sans', sans-serif;
+    --f-mono:'Space Mono', monospace;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--parchment); color:var(--ink);
+    font-family:var(--f-body); -webkit-font-smoothing:antialiased;
+    position:relative; overflow-x:hidden;
+  }
+  body::after{
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:999;
+    opacity:.05; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  a{color:inherit;}
+
+  .yantra{
+    position:absolute; top:-40px; right:-100px;
+    width:min(480px, 65vw); height:auto;
+    opacity:.05; pointer-events:none; z-index:0;
+  }
+
+  .masthead{ width:100%; padding:clamp(20px,4vw,36px) clamp(20px,5vw,56px) 0; position:relative; z-index:2; }
+  .wordmark{ display:flex; align-items:baseline; gap:8px; width:fit-content; text-decoration:none; color:var(--ink); }
+  .word-big{ font-family:var(--f-display); font-weight:800; font-size:clamp(20px,3.4vw,26px); white-space:nowrap; line-height:1; }
+  .word-small{ font-family:var(--f-body); font-weight:400; font-size:clamp(12px,1.6vw,15px); color:var(--ink-soft); white-space:nowrap; }
+
+  main{
+    max-width:640px;
+    margin:0 auto;
+    padding:clamp(50px,9vw,90px) clamp(20px,5vw,56px) clamp(90px,12vw,140px);
+    position:relative; z-index:1;
+    text-align:center;
+  }
+
+  .eyebrow{
+    font-family:var(--f-mono); font-size:12px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--saffron); margin-bottom:28px;
+  }
+
+  h1{
+    font-family:var(--f-display); font-weight:800; font-size:clamp(40px,9vw,72px);
+    margin:0; line-height:1; text-transform:lowercase; letter-spacing:-0.01em;
+  }
+
+  .lede{
+    font-family:var(--f-display); font-weight:500;
+    font-size:clamp(19px,2.8vw,24px); line-height:1.55;
+    color:var(--ink); margin:30px auto 0; max-width:38ch;
+  }
+
+  p.body-text{
+    font-size:15.5px; line-height:1.85; color:var(--ink-soft);
+    margin:22px auto 0; max-width:46ch;
+  }
+
+  .mark{
+    margin:44px auto 0;
+    width:64px; height:1px;
+    background:var(--gold);
+  }
+
+  .links{
+    margin-top:44px; display:flex; flex-wrap:wrap; gap:12px; justify-content:center;
+  }
+  .links a{
+    display:inline-flex; align-items:center; gap:8px;
+    border:1px solid var(--line); border-radius:999px;
+    padding:10px 20px; text-decoration:none; font-size:13.5px; font-weight:500;
+    font-family:var(--f-body);
+    transition:transform .2s ease, border-color .2s ease, background .2s ease, color .2s ease;
+  }
+  .links a:hover{ transform:translateY(-2px); border-color:var(--ink); }
+  .links a.gh:hover{ background:var(--peacock); color:#fff; border-color:var(--peacock); }
+  .links a.li:hover{ background:#0A5C8A; color:#fff; border-color:#0A5C8A; }
+  .links a.x:hover{ background:var(--ink); color:var(--parchment); }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<svg class="yantra" viewBox="0 0 400 400" fill="none" aria-hidden="true">
+  <circle cx="200" cy="200" r="180" stroke="currentColor" stroke-width="1"/>
+  <circle cx="200" cy="200" r="140" stroke="currentColor" stroke-width="1"/>
+  <circle cx="200" cy="200" r="100" stroke="currentColor" stroke-width="1"/>
+  <circle cx="200" cy="200" r="60" stroke="currentColor" stroke-width="1"/>
+  <path d="M200 20 L200 380 M20 200 L380 200" stroke="currentColor" stroke-width="1"/>
+  <path d="M200 20 L380 200 L200 380 L20 200 Z" stroke="currentColor" stroke-width="1"/>
+</svg>
+
+<header class="masthead">
+  <a href="/" class="wordmark" aria-label="OLDMILL.in home">
+    <span class="word-big">OLDMILL</span>
+    <span class="word-small">.in</span>
+  </a>
+</header>
+
+<main>
+  <p class="eyebrow">Who</p>
+
+  <h1>priyanshu</h1>
+
+  <p class="lede">not quite a person — more a signature that keeps showing up where things get built.</p>
+
+  <p class="body-text">
+    no fixed origin, no long record kept. only the pattern: an idea arrives, gets argued with,
+    gets built anyway, and is left running once it works. what's signed under it is the only
+    part that matters — everything else is left out on purpose.
+  </p>
+
+  <div class="mark"></div>
+
+  <div class="links">
+    <a class="gh" href="https://github.com/if-else-repeat" target="_blank" rel="noopener">github ↗</a>
+    <a class="li" href="https://www.linkedin.com/in/priyanshu-raj-mishra" target="_blank" rel="noopener">linkedin ↗</a>
+    <a class="x" href="https://x.com/if_else_repeat" target="_blank" rel="noopener">x ↗</a>
+  </div>
+</main>
+
+</body>
+</html>

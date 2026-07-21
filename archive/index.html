@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archive — OLDMILL.in</title>
+<meta name="description" content="Archive — a personal media & thought archive across 18 categories.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:wght@400..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#F4ECD8; --card:#F8F2E2;
+    --ink:#241B12; --ink-soft:#5C4E3B;
+    --saffron:#DD6B12; --peacock:#0E6659; --sindoor:#AE3B26;
+    --gold:#B4841C; --turmeric:#EFB80B;
+    --line: rgba(36,27,18,0.16);
+    --f-display:'Bricolage Grotesque', sans-serif;
+    --f-body:'Instrument Sans', sans-serif;
+    --f-mono:'Space Mono', monospace;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--parchment); color:var(--ink);
+    font-family:var(--f-body); -webkit-font-smoothing:antialiased;
+    position:relative; overflow-x:hidden;
+  }
+  body::after{
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:999;
+    opacity:.05; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  a{color:inherit;}
+
+  .masthead{ width:100%; padding:clamp(20px,4vw,36px) clamp(20px,5vw,56px) 0; }
+  .wordmark{ display:flex; align-items:baseline; gap:8px; width:fit-content; text-decoration:none; color:var(--ink); }
+  .word-big{ font-family:var(--f-display); font-weight:800; font-size:clamp(20px,3.4vw,26px); white-space:nowrap; line-height:1; }
+  .word-small{ font-family:var(--f-body); font-weight:400; font-size:clamp(12px,1.6vw,15px); color:var(--ink-soft); white-space:nowrap; }
+
+  main{
+    max-width:760px;
+    margin:0 auto;
+    padding:clamp(30px,6vw,56px) clamp(20px,5vw,56px) clamp(80px,10vw,120px);
+    position:relative; z-index:1;
+  }
+
+  .eyebrow{
+    font-family:var(--f-mono); font-size:12px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--saffron); margin-bottom:22px;
+  }
+
+  .logo-row{ display:flex; align-items:center; gap:18px; margin-bottom:22px; }
+  .ar-logo{
+    width:58px; height:58px; border-radius:15px;
+    background:var(--turmeric); border:3.5px solid var(--ink);
+    box-shadow:4px 4px 0 var(--ink);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .ar-logo:hover{ transform:scale(1.05) translate(1.5px,1.5px); box-shadow:2.5px 2.5px 0 var(--ink); }
+  .ar-logo svg{ width:28px; height:28px; }
+
+  h1{
+    font-family:var(--f-display); font-weight:700;
+    font-size:clamp(30px,6vw,48px); margin:0; line-height:1.05;
+  }
+
+  .lede{
+    font-family:var(--f-display); font-weight:500;
+    font-size:clamp(18px,2.4vw,22px); line-height:1.5;
+    color:var(--ink); margin:24px 0 0; max-width:52ch;
+  }
+
+  p.body-text{
+    font-size:15.5px; line-height:1.75; color:var(--ink-soft);
+    margin-top:18px; max-width:56ch;
+  }
+
+  .tag-list{ display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
+  .tag{
+    font-family:var(--f-mono); font-size:11px;
+    border:1px solid var(--line); border-radius:999px;
+    padding:5px 12px; color:var(--ink-soft);
+  }
+
+  /* live window */
+  .browser{
+    margin-top:40px;
+    border:2px solid var(--ink);
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:8px 8px 0 var(--line);
+  }
+  .browser-bar{
+    background:var(--card);
+    padding:10px 14px;
+    display:flex; align-items:center; gap:8px;
+    border-bottom:2px solid var(--ink);
+  }
+  .dot{ width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+  .dot.r{ background:var(--sindoor); }
+  .dot.y{ background:var(--turmeric); }
+  .dot.g{ background:var(--peacock); }
+  .browser-url{
+    margin-left:8px; flex:1;
+    font-family:var(--f-mono); font-size:12px; color:var(--ink-soft);
+    background:var(--parchment); border-radius:999px; padding:6px 14px;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    text-decoration:none;
+  }
+  .browser-url:hover{ color:var(--sindoor); }
+  .browser iframe{
+    width:100%; height:520px; border:0; display:block; background:#fff;
+  }
+  .browser-fallback{
+    padding:10px 14px; font-family:var(--f-mono); font-size:11.5px;
+    color:var(--ink-soft); border-top:1px solid var(--line);
+  }
+  .browser-fallback a{ color:var(--sindoor); }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <a href="/" class="wordmark" aria-label="OLDMILL.in home">
+    <span class="word-big">OLDMILL</span>
+    <span class="word-small">.in</span>
+  </a>
+</header>
+
+<main>
+  <p class="eyebrow">Project</p>
+
+  <div class="logo-row">
+    <div class="ar-logo">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6Z" fill="#241B12"/></svg>
+    </div>
+  </div>
+
+  <h1>Archive</h1>
+  <p class="lede">A personal media &amp; thought archive — one place to log and organize everything you've watched, read, played, and thought.</p>
+
+  <p class="body-text">
+    Archive spans 18 categories — movies, books, anime, journal entries, quotes, and more —
+    with metadata fetched automatically so logging stays fast. Everything is browsable like a
+    social feed and searchable from anywhere, turning scattered consumption into one running record.
+  </p>
+
+  <div class="tag-list">
+    <span class="tag">Movies</span>
+    <span class="tag">Books</span>
+    <span class="tag">Anime</span>
+    <span class="tag">Journal</span>
+    <span class="tag">Quotes</span>
+    <span class="tag">+13 more</span>
+  </div>
+
+  <div class="browser">
+    <div class="browser-bar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <a class="browser-url" href="https://archive.oldmill.in" target="_blank" rel="noopener">archive.oldmill.in</a>
+    </div>
+    <iframe src="https://archive.oldmill.in" loading="lazy" title="Archive — live site"></iframe>
+    <div class="browser-fallback">
+      Not loading? <a href="https://archive.oldmill.in" target="_blank" rel="noopener">open archive.oldmill.in directly ↗</a>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OLDMILL.in</title>
+<meta name="description" content="OLDMILL — a house of projects. RabbitHole, Archive, and whatever comes next.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:wght@400..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#F4ECD8;
+    --card:#F8F2E2;
+    --ink:#241B12;
+    --ink-soft:#5C4E3B;
+    --saffron:#DD6B12;
+    --peacock:#0E6659;
+    --sindoor:#AE3B26;
+    --gold:#B4841C;
+    --turmeric:#EFB80B;
+    --line: rgba(36,27,18,0.16);
+    --f-display:'Bricolage Grotesque', sans-serif;
+    --f-body:'Instrument Sans', sans-serif;
+    --f-mono:'Space Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--parchment);
+    color:var(--ink);
+    font-family:var(--f-body);
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+    overflow-x:hidden;
+  }
+  body::after{
+    content:'';
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index:999;
+    opacity:.05;
+    mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  a{color:inherit;}
+
+  .yantra{
+    position:absolute;
+    top:-40px; right:-80px;
+    width:min(560px, 70vw);
+    height:auto;
+    opacity:.05;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* ---------- MASTHEAD ---------- */
+  .masthead{
+    width:100%;
+    padding:clamp(18px,4vw,36px) clamp(20px,5vw,56px) 0;
+    position:relative;
+    z-index:2;
+  }
+  .wordmark-fit{
+    display:flex;
+    align-items:baseline;
+    width:100%;
+    gap:clamp(6px,1vw,14px);
+    text-decoration:none;
+    color:var(--ink);
+  }
+  .word-big{
+    font-family:var(--f-display);
+    font-weight:800;
+    font-size:15vw;
+    line-height:0.85;
+    white-space:nowrap;
+    letter-spacing:-0.01em;
+  }
+  .word-small{
+    font-family:var(--f-body);
+    font-weight:400;
+    font-size:clamp(14px,2vw,22px);
+    color:var(--ink-soft);
+    white-space:nowrap;
+    flex-shrink:0;
+    padding-bottom:0.15em;
+  }
+
+  .tagline{
+    font-family:var(--f-mono);
+    font-size:clamp(11px,1.6vw,13px);
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    margin-top:14px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    z-index:1;
+    padding:clamp(40px,8vw,90px) clamp(20px,5vw,56px) clamp(30px,6vw,60px);
+    max-width:980px;
+  }
+  .hero h1{
+    font-family:var(--f-display);
+    font-weight:700;
+    font-size:clamp(26px,4.4vw,44px);
+    line-height:1.15;
+    margin:0;
+    max-width:17ch;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--sindoor);
+  }
+  .hero p{
+    font-size:clamp(15px,1.8vw,17px);
+    color:var(--ink-soft);
+    max-width:52ch;
+    line-height:1.6;
+    margin-top:18px;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section{
+    position:relative;
+    z-index:1;
+    padding:0 clamp(20px,5vw,56px);
+  }
+  .eyebrow{
+    font-family:var(--f-mono);
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--saffron);
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin:0 0 20px;
+  }
+  .eyebrow::after{
+    content:'';
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+
+  .projects{
+    margin-top:clamp(20px,4vw,40px);
+    padding-bottom:clamp(50px,8vw,80px);
+  }
+  .card-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+  }
+  @media (max-width:680px){
+    .card-grid{grid-template-columns:1fr;}
+  }
+
+  .project-card{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:26px;
+    text-decoration:none;
+    color:var(--ink);
+    position:relative;
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .project-card:hover{
+    transform:translateY(-4px);
+    border-color:var(--ink);
+    box-shadow:0 14px 30px rgba(36,27,18,.12);
+  }
+  .project-card .row-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .project-card h3{
+    font-family:var(--f-display);
+    font-weight:700;
+    font-size:22px;
+    margin:0;
+  }
+  .project-card .arrow{
+    font-size:18px;
+    transition:transform .25s ease;
+  }
+  .project-card:hover .arrow{ transform:translate(4px,-4px); }
+  .project-card p{
+    margin:0;
+    font-size:14.5px;
+    line-height:1.55;
+    color:var(--ink-soft);
+  }
+  .project-card .subdomain{
+    font-family:var(--f-mono);
+    font-size:11.5px;
+    color:var(--peacock);
+    letter-spacing:.02em;
+  }
+
+  /* RabbitHole logo — 3D press */
+  .rh-logo{
+    position:relative;
+    width:32px; height:32px;
+    border-radius:50%;
+    border:2px solid var(--ink);
+    overflow:hidden;
+    flex-shrink:0;
+    box-shadow:0 2px 0 var(--ink);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .project-card:hover .rh-logo{
+    transform:scale(1.05) translateY(1px);
+    box-shadow:0 1px 0 var(--ink);
+  }
+  .rh-logo span{
+    position:absolute;
+    width:20px; height:20px;
+    border:2px solid var(--ink);
+    border-radius:50%;
+  }
+  .rh-logo .c1{ top:-4px; right:-4px; }
+  .rh-logo .c2{ bottom:-4px; left:-4px; }
+
+  /* Archive logo — 3D press */
+  .ar-logo{
+    width:38px; height:38px;
+    border-radius:11px;
+    background:var(--turmeric);
+    border:3px solid var(--ink);
+    box-shadow:3px 3px 0 var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .project-card:hover .ar-logo{
+    transform:scale(1.05) translate(1px,1px);
+    box-shadow:2px 2px 0 var(--ink);
+  }
+  .ar-logo svg{ width:19px; height:19px; }
+
+  /* ---------- CONNECT ---------- */
+  .connect{
+    padding-top:clamp(10px,3vw,20px);
+    padding-bottom:clamp(60px,9vw,100px);
+  }
+  .connect-row{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:14px;
+  }
+  .about-chip{
+    display:flex;
+    align-items:center;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:12px 22px;
+    text-decoration:none;
+    color:var(--ink);
+    font-family:var(--f-display);
+    font-weight:600;
+    font-size:15px;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .about-chip:hover{ border-color:var(--ink); transform:translateY(-2px); }
+
+  .icon-btn{
+    width:44px; height:44px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--card);
+    display:flex; align-items:center; justify-content:center;
+    text-decoration:none;
+    transition:transform .2s ease, border-color .2s ease, background .2s ease;
+  }
+  .icon-btn svg{ width:19px; height:19px; transition:fill .2s ease; }
+  .icon-btn:hover{ transform:translateY(-2px); border-color:var(--ink); }
+  .icon-btn.gh:hover{ background:var(--peacock); }
+  .icon-btn.gh:hover svg{ fill:#fff; }
+  .icon-btn.li:hover{ background:#0A5C8A; }
+  .icon-btn.li:hover svg{ fill:#fff; }
+  .icon-btn.x:hover{ background:var(--ink); }
+  .icon-btn.x:hover svg{ fill:#fff; }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    position:relative; z-index:1;
+    padding:22px clamp(20px,5vw,56px) 34px;
+    border-top:1px solid var(--line);
+    display:flex; flex-wrap:wrap; gap:8px;
+    justify-content:space-between;
+    font-family:var(--f-mono);
+    font-size:11.5px;
+    color:var(--ink-soft);
+    letter-spacing:.02em;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<svg class="yantra" viewBox="0 0 400 400" fill="none" aria-hidden="true">
+  <circle cx="200" cy="200" r="180" stroke="currentColor" stroke-width="1"/>
+  <circle cx="200" cy="200" r="140" stroke="currentColor" stroke-width="1"/>
+  <circle cx="200" cy="200" r="100" stroke="currentColor" stroke-width="1"/>
+  <circle cx="200" cy="200" r="60" stroke="currentColor" stroke-width="1"/>
+  <path d="M200 20 L200 380 M20 200 L380 200" stroke="currentColor" stroke-width="1"/>
+  <path d="M200 20 L380 200 L200 380 L20 200 Z" stroke="currentColor" stroke-width="1"/>
+</svg>
+
+<header class="masthead">
+  <a href="/" class="wordmark-fit" id="wordmark" aria-label="OLDMILL.in home">
+    <span class="word-big">OLDMILL</span>
+    <span class="word-small">.in</span>
+  </a>
+  <div class="tagline">projects, kept running</div>
+</header>
+
+<div class="hero">
+  <h1>Things that got <em>built</em>, not just planned.</h1>
+  <p>OLDMILL holds the projects worth keeping — each one shipped, documented, and still running.</p>
+</div>
+
+<section class="projects">
+  <p class="eyebrow">Projects</p>
+  <div class="card-grid">
+
+    <a href="/rabbithole" class="project-card">
+      <div class="row-top">
+        <div class="rh-logo"><span class="c1"></span><span class="c2"></span></div>
+        <span class="arrow">↗</span>
+      </div>
+      <div>
+        <h3>RabbitHole</h3>
+        <p>A curated library of deep-dive AI conversations and insights.</p>
+      </div>
+      <span class="subdomain">rabbithole.oldmill.in</span>
+    </a>
+
+    <a href="/archive" class="project-card">
+      <div class="row-top">
+        <div class="ar-logo">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6Z" fill="#241B12"/></svg>
+        </div>
+        <span class="arrow">↗</span>
+      </div>
+      <div>
+        <h3>Archive</h3>
+        <p>A personal media &amp; thought archive — everything watched, read, played and thought, across 18 categories, in one searchable feed.</p>
+      </div>
+      <span class="subdomain">archive.oldmill.in</span>
+    </a>
+
+  </div>
+</section>
+
+<section class="connect">
+  <p class="eyebrow">Connect</p>
+  <div class="connect-row">
+
+    <a href="/about" class="about-chip">priyanshu</a>
+
+    <a class="icon-btn gh" href="https://github.com/if-else-repeat" target="_blank" rel="noopener" aria-label="GitHub">
+      <svg viewBox="0 0 24 24" fill="var(--ink)"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.838 1.237 1.838 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.303-5.467-1.334-5.467-5.93 0-1.31.468-2.38 1.235-3.22-.123-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.5 11.5 0 013.003-.404c1.02.005 2.047.138 3.003.404 2.29-1.552 3.297-1.23 3.297-1.23.653 1.653.24 2.873.118 3.176.77.84 1.233 1.91 1.233 3.22 0 4.61-2.807 5.624-5.48 5.92.43.372.814 1.103.814 2.222 0 1.604-.015 2.896-.015 3.29 0 .32.216.694.825.576C20.565 21.795 24 17.297 24 12c0-6.63-5.37-12-12-12z"/></svg>
+    </a>
+
+    <a class="icon-btn li" href="https://www.linkedin.com/in/priyanshu-raj-mishra" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="var(--ink)"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 11.001-4.125 2.062 2.062 0 01-.001 4.125zM7.119 20.452H3.554V9h3.565v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+
+    <a class="icon-btn x" href="https://x.com/if_else_repeat" target="_blank" rel="noopener" aria-label="X (Twitter)">
+      <svg viewBox="0 0 24 24" fill="var(--ink)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 OLDMILL</span>
+  <span>all projects, one house</span>
+</footer>
+
+<script>
+  function fitWordmark(){
+    var wrap = document.getElementById('wordmark');
+    if(!wrap) return;
+    var big = wrap.querySelector('.word-big');
+    var small = wrap.querySelector('.word-small');
+    var containerWidth = wrap.clientWidth;
+    var gap = parseFloat(getComputedStyle(wrap).gap) || 10;
+    var smallWidth = small.offsetWidth;
+    var target = containerWidth - smallWidth - gap;
+    if(target <= 0) return;
+    big.style.fontSize = '100px';
+    var naturalWidth = big.scrollWidth;
+    if(naturalWidth <= 0) return;
+    var newSize = 100 * (target / naturalWidth);
+    big.style.fontSize = Math.max(newSize, 20) + 'px';
+  }
+  var t;
+  function debouncedFit(){ clearTimeout(t); t = setTimeout(fitWordmark, 60); }
+  window.addEventListener('resize', debouncedFit);
+  window.addEventListener('load', fitWordmark);
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(fitWordmark); }
+  fitWordmark();
+</script>
+
+</body>
+</html>
