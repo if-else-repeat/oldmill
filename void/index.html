@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>oldmill.in(pawsquare)</title>
-<meta name="description" content="PawSquare, a pet's entire life, in one place.">
+<title>oldmill.in(paradigm slaughter)</title>
+<meta name="description" content="Paradigm Slaughter, a visceral digital manifesto tearing down creative boundaries.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:wght@400..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -19,9 +18,6 @@
     --f-display:'Bricolage Grotesque', sans-serif;
     --f-body:'Instrument Sans', sans-serif;
     --f-mono:'Space Mono', monospace;
-    --ps-forest:#2f4a3c;
-    --ps-terracotta:#e08a63;
-    --ps-terracotta-deep:#a85a3c;
   }
   *{box-sizing:border-box;}
   body{
@@ -53,30 +49,25 @@
     text-transform:uppercase; color:var(--saffron); margin-bottom:22px;
   }
 
+  .tag-row{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:22px; }
+  .tag-pill{
+    font-family:var(--f-mono); font-size:10px; letter-spacing:.04em;
+    text-transform:uppercase; padding:3px 9px; border-radius:999px;
+    border:1px solid var(--line); color:var(--ink-soft); line-height:1.6;
+  }
+  .tag-pill.status-live{ color:var(--peacock); border-color:var(--peacock); }
+
   .logo-row{ display:flex; align-items:center; gap:18px; margin-bottom:22px; }
 
-  /* PawSquare logo — two rotated layers */
-  .ps-logo{ position:relative; width:58px; height:58px; flex-shrink:0; }
-  .ps-logo-bg{
-    position:absolute; inset:0;
-    background:var(--ps-forest);
-    border-radius:16px;
-    transform:rotate(-8deg);
-    box-shadow:0 1px 2px rgba(0,0,0,.08);
-    transition:transform .25s ease;
+  /* Void / Paradigm Slaughter logo — curved square, native colors kept as-is */
+  .void-logo{
+    width:64px; height:64px; border-radius:18px;
+    overflow:hidden; flex-shrink:0;
+    box-shadow:4px 4px 0 var(--ink);
+    transition:transform .2s ease, box-shadow .2s ease;
   }
-  .ps-logo-fg{
-    position:absolute; inset:0;
-    background:linear-gradient(135deg, var(--ps-terracotta), var(--ps-terracotta-deep));
-    border-radius:16px;
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -2px rgba(0,0,0,.1);
-    border:1px solid rgba(255,255,255,.2);
-    transition:transform .25s ease;
-  }
-  .ps-logo-fg svg{ width:30px; height:30px; }
-  .ps-logo:hover .ps-logo-bg{ transform:rotate(-14deg); }
-  .ps-logo:hover .ps-logo-fg{ transform:rotate(2deg) scale(1.04); }
+  .void-logo:hover{ transform:scale(1.05); box-shadow:0 0 16px rgba(214,0,0,.45); }
+  .void-logo svg{ width:100%; height:100%; display:block; }
 
   h1{
     font-family:var(--f-display); font-weight:700;
@@ -131,10 +122,10 @@
     width:100%;
     overflow:hidden;
     position:relative;
-    background:#fff;
+    background:#000;
   }
   .browser iframe{
-    width:1280px; height:800px; border:0; display:block; background:#fff;
+    width:1280px; height:800px; border:0; display:block; background:#000;
     transform-origin:0 0;
   }
   .browser-fallback{
@@ -158,47 +149,67 @@
 <main>
   <p class="eyebrow">Project</p>
 
+  <div class="tag-row">
+    <span class="tag-pill">Visual Design</span>
+    <span class="tag-pill status-live">Live</span>
+  </div>
+
   <div class="logo-row">
-    <div class="ps-logo">
-      <div class="ps-logo-bg"></div>
-      <div class="ps-logo-fg">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff8f2" stroke="#fff8f2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="4" r="2"/>
-          <circle cx="18" cy="8" r="2"/>
-          <circle cx="20" cy="16" r="2"/>
-          <path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"/>
-        </svg>
-      </div>
+    <div class="void-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+        <defs>
+          <filter id="glitch">
+            <feOffset dx="8" dy="-8" in="SourceGraphic" result="red-shift"/>
+            <feColorMatrix in="red-shift" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red-layer"/>
+            <feOffset dx="-8" dy="8" in="SourceGraphic" result="cyan-shift"/>
+            <feColorMatrix in="cyan-shift" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0" result="cyan-layer"/>
+            <feMerge>
+              <feMergeNode in="red-layer"/>
+              <feMergeNode in="cyan-layer"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        <rect width="512" height="512" fill="#000000" />
+        <path d="M380 120 L180 420 L130 420 L330 120 Z" fill="#d60000" filter="url(#glitch)"/>
+        <path d="M280 120 L80 420 L100 420 L300 120 Z" fill="#4a0000" />
+        <path d="M420 180 L350 400 L320 400 L390 180 Z" fill="#c2d921" />
+        <rect x="150" y="250" width="80" height="15" fill="#ffffff" />
+        <rect x="300" y="320" width="50" height="10" fill="#d60000" />
+        <rect x="120" y="180" width="100" height="8" fill="#c2d921" />
+        <rect x="220" y="120" width="30" height="6" fill="#ffffff" />
+        <rect x="260" y="380" width="110" height="12" fill="#c2d921" />
+      </svg>
     </div>
   </div>
 
-  <h1>PawSquare</h1>
-  <p class="lede">A pet's entire life, in one place.</p>
+  <h1>Paradigm Slaughter</h1>
+  <p class="lede">A visceral digital manifesto tearing down creative boundaries.</p>
 
   <p class="body-text">
-    PawSquare is an automated pet health profile and community platform that connects with
-    your vet, groomer, and boarder to passively build and organize your pet's life data, with
-    no manual entry required.
+    Paradigm Slaughter is an immersive, glitch-heavy digital zine that rebels against conventional
+    design norms. Wrapped in a brutalist, horror-inspired aesthetic with deep bloody gradients and
+    chaotic typography, it challenges creators to break the rules, bleed their truth, and embrace
+    the raw, unfiltered chaos of midnight creativity.
   </p>
 
   <div class="tag-list">
-    <span class="tag">Health records</span>
-    <span class="tag">Vet sync</span>
-    <span class="tag">Grooming</span>
-    <span class="tag">Boarding</span>
-    <span class="tag">Community</span>
+    <span class="tag">Brutalist</span>
+    <span class="tag">Glitch art</span>
+    <span class="tag">Digital zine</span>
+    <span class="tag">Typography</span>
   </div>
 
   <div class="browser">
     <div class="browser-bar">
       <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-      <a class="browser-url" href="https://pawsquare.oldmill.in" target="_blank" rel="noopener">pawsquare.oldmill.in</a>
+      <a class="browser-url" href="https://void.oldmill.in" target="_blank" rel="noopener">void.oldmill.in</a>
     </div>
     <div class="browser-viewport">
-      <iframe id="live-frame" src="https://pawsquare.oldmill.in" loading="lazy" title="PawSquare — live site"></iframe>
+      <iframe id="live-frame" src="https://void.oldmill.in" loading="lazy" title="Paradigm Slaughter — live site"></iframe>
     </div>
     <div class="browser-fallback">
-      Not loading? <a href="https://pawsquare.oldmill.in" target="_blank" rel="noopener">open pawsquare.oldmill.in directly ↗</a>
+      Not loading? <a href="https://void.oldmill.in" target="_blank" rel="noopener">open void.oldmill.in directly ↗</a>
     </div>
   </div>
 </main>

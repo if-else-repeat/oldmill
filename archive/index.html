@@ -110,8 +110,15 @@
     text-decoration:none;
   }
   .browser-url:hover{ color:var(--sindoor); }
+  .browser-viewport{
+    width:100%;
+    overflow:hidden;
+    position:relative;
+    background:#fff;
+  }
   .browser iframe{
-    width:100%; height:520px; border:0; display:block; background:#fff;
+    width:1280px; height:800px; border:0; display:block; background:#fff;
+    transform-origin:0 0;
   }
   .browser-fallback{
     padding:10px 14px; font-family:var(--f-mono); font-size:11.5px;
@@ -161,12 +168,30 @@
       <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
       <a class="browser-url" href="https://archive.oldmill.in" target="_blank" rel="noopener">archive.oldmill.in</a>
     </div>
-    <iframe src="https://archive.oldmill.in" loading="lazy" title="Archive — live site"></iframe>
+    <div class="browser-viewport">
+      <iframe id="live-frame" src="https://archive.oldmill.in" loading="lazy" title="Archive — live site"></iframe>
+    </div>
     <div class="browser-fallback">
       Not loading? <a href="https://archive.oldmill.in" target="_blank" rel="noopener">open archive.oldmill.in directly ↗</a>
     </div>
   </div>
 </main>
+
+<script>
+  (function(){
+    var vp = document.querySelector('.browser-viewport');
+    var frame = document.getElementById('live-frame');
+    if(!vp || !frame) return;
+    function scaleFrame(){
+      var scale = vp.clientWidth / 1280;
+      frame.style.transform = 'scale(' + scale + ')';
+      vp.style.height = (800 * scale) + 'px';
+    }
+    window.addEventListener('resize', scaleFrame);
+    window.addEventListener('load', scaleFrame);
+    scaleFrame();
+  })();
+</script>
 
 </body>
 </html>

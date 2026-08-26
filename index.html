@@ -174,6 +174,26 @@
     align-items:center;
     justify-content:space-between;
   }
+  .tag-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  .tag-pill{
+    font-family:var(--f-mono);
+    font-size:10px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    padding:3px 9px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    color:var(--ink-soft);
+    line-height:1.6;
+  }
+  .tag-pill.status-live{ color:var(--peacock); border-color:var(--peacock); }
+  .tag-pill.status-progress{ color:var(--saffron); border-color:var(--saffron); }
+  .tag-pill.status-concept{ color:var(--ink-soft); border-color:var(--line); }
+  .tag-pill.status-archived{ color:var(--sindoor); border-color:var(--sindoor); }
   .project-card h3{
     font-family:var(--f-display);
     font-weight:700;
@@ -280,6 +300,35 @@
   .td-logo svg{ width:19px; height:19px; }
   .td-logo svg path,
   .td-logo svg circle{ stroke:var(--sindoor); stroke-width:1.6; }
+
+  /* J2B logo — skeuomorphic, native colors kept as-is */
+  .j2b-logo{
+    width:40px; height:40px; border-radius:12px;
+    background:#eef0f5;
+    border:1px solid rgba(255,255,255,.5);
+    box-shadow:4px 4px 8px rgba(163,177,198,.4), -4px -4px 8px rgba(255,255,255,.8);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    transition:box-shadow .2s ease, transform .2s ease;
+  }
+  .j2b-logo svg{ width:20px; height:20px; }
+  .project-card:hover .j2b-logo{
+    transform:scale(1.03);
+    box-shadow:2px 2px 4px rgba(163,177,198,.5), -2px -2px 4px rgba(255,255,255,.9), inset 1px 1px 2px rgba(163,177,198,.25);
+  }
+
+  /* Void / Paradigm Slaughter logo — curved square, native colors kept as-is */
+  .void-logo{
+    width:38px; height:38px; border-radius:11px;
+    overflow:hidden; flex-shrink:0;
+    box-shadow:2px 2px 0 var(--ink);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .void-logo svg{ width:100%; height:100%; display:block; }
+  .project-card:hover .void-logo{
+    transform:scale(1.05);
+    box-shadow:0 0 12px rgba(214,0,0,.45);
+  }
 
   /* ---------- CONNECT ---------- */
   .connect{
@@ -438,16 +487,83 @@
   <p class="eyebrow">Projects</p>
   <div class="card-grid">
 
+    <a href="/jee" class="project-card">
+      <div class="row-top">
+        <div class="j2b-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="6"></circle>
+            <circle cx="12" cy="12" r="2"></circle>
+          </svg>
+        </div>
+        <span class="arrow">↗</span>
+      </div>
+      <div class="tag-row">
+        <span class="tag-pill">Engineering</span>
+        <span class="tag-pill status-live">Live</span>
+      </div>
+      <div>
+        <h3>Journey to Brilliance</h3>
+        <p>A gamified, skeuomorphic daily planner and syllabus tracker built for JEE aspirants.</p>
+      </div>
+      <span class="subdomain">jee.oldmill.in</span>
+    </a>
+
     <a href="/rabbithole" class="project-card">
       <div class="row-top">
         <div class="rh-logo"><span class="c1"></span><span class="c2"></span></div>
         <span class="arrow">↗</span>
+      </div>
+      <div class="tag-row">
+        <span class="tag-pill">Engineering</span>
+        <span class="tag-pill status-live">Live</span>
       </div>
       <div>
         <h3>RabbitHole</h3>
         <p>A curated library of deep-dive AI conversations and insights.</p>
       </div>
       <span class="subdomain">rabbithole.oldmill.in</span>
+    </a>
+
+    <a href="/void" class="project-card">
+      <div class="row-top">
+        <div class="void-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+            <defs>
+              <filter id="glitch-mini">
+                <feOffset dx="8" dy="-8" in="SourceGraphic" result="red-shift"/>
+                <feColorMatrix in="red-shift" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red-layer"/>
+                <feOffset dx="-8" dy="8" in="SourceGraphic" result="cyan-shift"/>
+                <feColorMatrix in="cyan-shift" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0" result="cyan-layer"/>
+                <feMerge>
+                  <feMergeNode in="red-layer"/>
+                  <feMergeNode in="cyan-layer"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            <rect width="512" height="512" fill="#000000" />
+            <path d="M380 120 L180 420 L130 420 L330 120 Z" fill="#d60000" filter="url(#glitch-mini)"/>
+            <path d="M280 120 L80 420 L100 420 L300 120 Z" fill="#4a0000" />
+            <path d="M420 180 L350 400 L320 400 L390 180 Z" fill="#c2d921" />
+            <rect x="150" y="250" width="80" height="15" fill="#ffffff" />
+            <rect x="300" y="320" width="50" height="10" fill="#d60000" />
+            <rect x="120" y="180" width="100" height="8" fill="#c2d921" />
+            <rect x="220" y="120" width="30" height="6" fill="#ffffff" />
+            <rect x="260" y="380" width="110" height="12" fill="#c2d921" />
+          </svg>
+        </div>
+        <span class="arrow">↗</span>
+      </div>
+      <div class="tag-row">
+        <span class="tag-pill">Visual Design</span>
+        <span class="tag-pill status-live">Live</span>
+      </div>
+      <div>
+        <h3>Paradigm Slaughter</h3>
+        <p>A visceral digital manifesto tearing down creative boundaries.</p>
+      </div>
+      <span class="subdomain">void.oldmill.in</span>
     </a>
 
     <a href="/archive" class="project-card">
@@ -457,11 +573,37 @@
         </div>
         <span class="arrow">↗</span>
       </div>
+      <div class="tag-row">
+        <span class="tag-pill">Systems</span>
+        <span class="tag-pill status-progress">In Progress</span>
+      </div>
       <div>
         <h3>Archive</h3>
         <p>A personal archive for everything you consume, create, collect, and remember.</p>
       </div>
       <span class="subdomain">archive.oldmill.in</span>
+    </a>
+
+    <a href="/thelastdecision" class="project-card">
+      <div class="row-top">
+        <div class="td-logo">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 2L3 7v6c0 5 4 8.5 9 9 5-.5 9-4 9-9V7l-9-5z" stroke-width="1.3" stroke-linejoin="round"/>
+            <path d="M12 8v5" stroke-width="1.3" stroke-linecap="round"/>
+            <circle cx="12" cy="15.6" r="0.9" fill="var(--sindoor)" stroke="none"/>
+          </svg>
+        </div>
+        <span class="arrow">↗</span>
+      </div>
+      <div class="tag-row">
+        <span class="tag-pill">Systems</span>
+        <span class="tag-pill status-progress">In Progress</span>
+      </div>
+      <div>
+        <h3>The Last Decision</h3>
+        <p>A digital archive and interactive museum exploring the human factors and choices immediately preceding major historical catastrophes.</p>
+      </div>
+      <span class="subdomain">thelastdecision.oldmill.in</span>
     </a>
 
     <a href="/pawsquare" class="project-card">
@@ -479,29 +621,15 @@
         </div>
         <span class="arrow">↗</span>
       </div>
+      <div class="tag-row">
+        <span class="tag-pill">Product Design</span>
+        <span class="tag-pill status-concept">Concept</span>
+      </div>
       <div>
         <h3>PawSquare</h3>
         <p>An automated pet health profile and community platform that passively builds and organizes your pet's life data.</p>
       </div>
       <span class="subdomain">pawsquare.oldmill.in</span>
-    </a>
-
-    <a href="/thelastdecision" class="project-card">
-      <div class="row-top">
-        <div class="td-logo">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M12 2L3 7v6c0 5 4 8.5 9 9 5-.5 9-4 9-9V7l-9-5z" stroke-width="1.3" stroke-linejoin="round"/>
-            <path d="M12 8v5" stroke-width="1.3" stroke-linecap="round"/>
-            <circle cx="12" cy="15.6" r="0.9" fill="var(--sindoor)" stroke="none"/>
-          </svg>
-        </div>
-        <span class="arrow">↗</span>
-      </div>
-      <div>
-        <h3>The Last Decision</h3>
-        <p>A digital archive and interactive museum exploring the human factors and choices immediately preceding major historical catastrophes.</p>
-      </div>
-      <span class="subdomain">thelastdecision.oldmill.in</span>
     </a>
 
   </div>
