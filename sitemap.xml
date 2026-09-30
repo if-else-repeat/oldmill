@@ -17,6 +17,10 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://oldmill.in/nota</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://oldmill.in/archive</loc>
     <priority>0.8</priority>
   </url>

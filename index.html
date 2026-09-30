@@ -330,6 +330,22 @@
     box-shadow:0 0 12px rgba(214,0,0,.45);
   }
 
+  /* NOTA logo — Ashoka Chakra mark, native amber kept as-is */
+  .nota-logo{
+    width:38px; height:38px; border-radius:50%;
+    background:var(--card); border:2px solid var(--ink);
+    box-shadow:2px 2px 0 var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .nota-logo svg{ width:25px; height:25px; transition:transform .5s ease; }
+  .project-card:hover .nota-logo{
+    transform:scale(1.05) translate(1px,1px);
+    box-shadow:1px 1px 0 var(--ink);
+  }
+  .project-card:hover .nota-logo svg{ transform:rotate(40deg); }
+
   /* ---------- CONNECT ---------- */
   .connect{
     padding-top:clamp(10px,3vw,20px);
@@ -564,6 +580,54 @@
         <p>A visceral digital manifesto tearing down creative boundaries.</p>
       </div>
       <span class="subdomain">void.oldmill.in</span>
+    </a>
+
+    <a href="/nota" class="project-card">
+      <div class="row-top">
+        <div class="nota-logo">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="100" cy="100" r="88" stroke="#E8761A" stroke-width="4" fill="none"/>
+            <circle cx="100" cy="100" r="10" fill="#E8761A"/>
+            <circle cx="100" cy="100" r="4" fill="#241B12"/>
+            <g stroke="#E8761A" stroke-width="2" opacity="0.85">
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(0 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(15 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(30 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(45 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(60 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(75 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(90 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(105 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(120 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(135 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(150 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(165 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(180 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(195 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(210 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(225 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(240 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(255 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(270 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(285 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(300 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(315 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(330 100 100)"/>
+              <line x1="100" y1="90" x2="100" y2="13" transform="rotate(345 100 100)"/>
+            </g>
+          </svg>
+        </div>
+        <span class="arrow">↗</span>
+      </div>
+      <div class="tag-row">
+        <span class="tag-pill">Systems</span>
+        <span class="tag-pill status-live">Live</span>
+      </div>
+      <div>
+        <h3>NOTA</h3>
+        <p>An interactive universe of India's electoral system, from ancient Vaishali to 968 million voters.</p>
+      </div>
+      <span class="subdomain">if-else-repeat.github.io/NOTA</span>
     </a>
 
     <a href="/archive" class="project-card">
