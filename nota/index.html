@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>oldmill.in(nota)</title>
+<meta name="description" content="NOTA, an interactive universe of India's electoral system.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:wght@400..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#F4ECD8; --card:#F8F2E2;
+    --ink:#241B12; --ink-soft:#5C4E3B;
+    --saffron:#DD6B12; --peacock:#0E6659; --sindoor:#AE3B26;
+    --gold:#B4841C; --turmeric:#EFB80B;
+    --line: rgba(36,27,18,0.16);
+    --f-display:'Bricolage Grotesque', sans-serif;
+    --f-body:'Instrument Sans', sans-serif;
+    --f-mono:'Space Mono', monospace;
+    --nota-amber:#E8761A;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--parchment); color:var(--ink);
+    font-family:var(--f-body); -webkit-font-smoothing:antialiased;
+    position:relative; overflow-x:hidden;
+  }
+  body::after{
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:999;
+    opacity:.05; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  a{color:inherit;}
+
+  .masthead{ width:100%; padding:clamp(20px,4vw,36px) clamp(20px,5vw,56px) 0; }
+  .wordmark{ display:flex; align-items:baseline; gap:0; width:fit-content; text-decoration:none; color:var(--ink); }
+  .word-big{ font-family:var(--f-display); font-weight:800; font-size:clamp(20px,3.4vw,26px); white-space:nowrap; line-height:1; }
+  .word-small{ font-family:var(--f-body); font-weight:400; font-size:clamp(12px,1.6vw,15px); color:var(--ink-soft); white-space:nowrap; }
+
+  main{
+    max-width:760px;
+    margin:0 auto;
+    padding:clamp(30px,6vw,56px) clamp(20px,5vw,56px) clamp(80px,10vw,120px);
+    position:relative; z-index:1;
+  }
+
+  .eyebrow{
+    font-family:var(--f-mono); font-size:12px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--saffron); margin-bottom:22px;
+  }
+
+  .tag-row{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:22px; }
+  .tag-pill{
+    font-family:var(--f-mono); font-size:10px; letter-spacing:.04em;
+    text-transform:uppercase; padding:3px 9px; border-radius:999px;
+    border:1px solid var(--line); color:var(--ink-soft); line-height:1.6;
+  }
+  .tag-pill.status-live{ color:var(--peacock); border-color:var(--peacock); }
+
+  .logo-row{ display:flex; align-items:center; gap:18px; margin-bottom:22px; }
+
+  /* NOTA logo — Ashoka Chakra mark, native amber kept as-is */
+  .nota-logo{
+    width:64px; height:64px; border-radius:50%;
+    background:var(--card); border:2.5px solid var(--ink);
+    box-shadow:4px 4px 0 var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .nota-logo:hover{ transform:scale(1.05) translate(1.5px,1.5px); box-shadow:2.5px 2.5px 0 var(--ink); }
+  .nota-logo svg{ width:42px; height:42px; transition:transform .5s ease; }
+  .nota-logo:hover svg{ transform:rotate(40deg); }
+
+  h1{
+    font-family:var(--f-display); font-weight:700;
+    font-size:clamp(30px,6vw,48px); margin:0; line-height:1.05;
+  }
+
+  .lede{
+    font-family:var(--f-display); font-weight:500;
+    font-size:clamp(18px,2.4vw,22px); line-height:1.5;
+    color:var(--ink); margin:24px 0 0; max-width:52ch;
+  }
+
+  p.body-text{
+    font-size:15.5px; line-height:1.75; color:var(--ink-soft);
+    margin-top:18px; max-width:56ch;
+  }
+
+  .tag-list{ display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
+  .tag{
+    font-family:var(--f-mono); font-size:11px;
+    border:1px solid var(--line); border-radius:999px;
+    padding:5px 12px; color:var(--ink-soft);
+  }
+
+  /* live window */
+  .browser{
+    margin-top:40px;
+    border:2px solid var(--ink);
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:8px 8px 0 var(--line);
+  }
+  .browser-bar{
+    background:var(--card);
+    padding:10px 14px;
+    display:flex; align-items:center; gap:8px;
+    border-bottom:2px solid var(--ink);
+  }
+  .dot{ width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+  .dot.r{ background:var(--sindoor); }
+  .dot.y{ background:var(--turmeric); }
+  .dot.g{ background:var(--peacock); }
+  .browser-url{
+    margin-left:8px; flex:1;
+    font-family:var(--f-mono); font-size:12px; color:var(--ink-soft);
+    background:var(--parchment); border-radius:999px; padding:6px 14px;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    text-decoration:none;
+  }
+  .browser-url:hover{ color:var(--sindoor); }
+  .browser-viewport{
+    width:100%;
+    overflow:hidden;
+    position:relative;
+    background:#0D0A06;
+  }
+  .browser iframe{
+    width:1280px; height:800px; border:0; display:block; background:#0D0A06;
+    transform-origin:0 0;
+  }
+  .browser-fallback{
+    padding:10px 14px; font-family:var(--f-mono); font-size:11.5px;
+    color:var(--ink-soft); border-top:1px solid var(--line);
+  }
+  .browser-fallback a{ color:var(--sindoor); }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <a href="/" class="wordmark" aria-label="OLDMILL.in home">
+    <span class="word-big">OLDMILL</span>
+    <span class="word-small">.in</span>
+  </a>
+</header>
+
+<main>
+  <p class="eyebrow">Project</p>
+
+  <div class="tag-row">
+    <span class="tag-pill">Systems</span>
+    <span class="tag-pill status-live">Live</span>
+  </div>
+
+  <div class="logo-row">
+    <div class="nota-logo">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="100" cy="100" r="88" stroke="#E8761A" stroke-width="4" fill="none"/>
+        <circle cx="100" cy="100" r="10" fill="#E8761A"/>
+        <circle cx="100" cy="100" r="4" fill="#241B12"/>
+        <g stroke="#E8761A" stroke-width="2" opacity="0.85">
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(0 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(15 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(30 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(45 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(60 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(75 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(90 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(105 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(120 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(135 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(150 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(165 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(180 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(195 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(210 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(225 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(240 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(255 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(270 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(285 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(300 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(315 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(330 100 100)"/>
+          <line x1="100" y1="90" x2="100" y2="13" transform="rotate(345 100 100)"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <h1>NOTA</h1>
+  <p class="lede">India's Election Universe, from Vaishali's ancient republic to 968 million voters.</p>
+
+  <p class="body-text">
+    NOTA is an interactive educational experience built to make India's electoral system easier
+    to understand. Through timelines, historical context, election processes, and democratic
+    institutions, it presents election education in an engaging, visual format, tracing a line
+    from the world's first republic in 600 BCE Vaishali to the record-setting scale of India's
+    elections today.
+  </p>
+
+  <div class="tag-list">
+    <span class="tag">Civic education</span>
+    <span class="tag">Interactive timeline</span>
+    <span class="tag">Indian history</span>
+    <span class="tag">Data storytelling</span>
+  </div>
+
+  <div class="browser">
+    <div class="browser-bar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <a class="browser-url" href="https://if-else-repeat.github.io/NOTA/" target="_blank" rel="noopener">if-else-repeat.github.io/NOTA</a>
+    </div>
+    <div class="browser-viewport">
+      <iframe id="live-frame" src="https://if-else-repeat.github.io/NOTA/" loading="lazy" title="NOTA — live site"></iframe>
+    </div>
+    <div class="browser-fallback">
+      Not loading? <a href="https://if-else-repeat.github.io/NOTA/" target="_blank" rel="noopener">open if-else-repeat.github.io/NOTA directly ↗</a>
+    </div>
+  </div>
+</main>
+
+<script>
+  (function(){
+    var vp = document.querySelector('.browser-viewport');
+    var frame = document.getElementById('live-frame');
+    if(!vp || !frame) return;
+    function scaleFrame(){
+      var scale = vp.clientWidth / 1280;
+      frame.style.transform = 'scale(' + scale + ')';
+      vp.style.height = (800 * scale) + 'px';
+    }
+    window.addEventListener('resize', scaleFrame);
+    window.addEventListener('load', scaleFrame);
+    scaleFrame();
+  })();
+</script>
+
+</body>
+</html>
