@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OLDMILL.in</title>
-<meta name="description" content="OLDMILL — a house of projects. RabbitHole, Archive, and whatever comes next.">
+<meta name="description" content="A house of projects, built and kept running.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:wght@400..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -345,6 +345,19 @@
     box-shadow:1px 1px 0 var(--ink);
   }
   .project-card:hover .nota-logo svg{ transform:rotate(40deg); }
+
+  /* SATHI logo — exact brand mark, native colors kept as-is */
+  .sathi-logo{
+    width:38px; height:38px; border-radius:11px;
+    overflow:hidden; flex-shrink:0;
+    box-shadow:2px 2px 0 var(--ink);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .sathi-logo svg{ width:100%; height:100%; display:block; }
+  .project-card:hover .sathi-logo{
+    transform:scale(1.05) translate(1px,1px);
+    box-shadow:1px 1px 0 var(--ink);
+  }
 
   /* ---------- CONNECT ---------- */
   .connect{
@@ -694,6 +707,33 @@
         <p>An automated pet health profile and community platform that passively builds and organizes your pet's life data.</p>
       </div>
       <span class="subdomain">pawsquare.oldmill.in</span>
+    </a>
+
+    <a href="/sathi" class="project-card">
+      <div class="row-top">
+        <div class="sathi-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true">
+            <defs><linearGradient id="sathi-g-mini" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#8a3428"/><stop offset="1" stop-color="#5d211b"/>
+            </linearGradient></defs>
+            <rect width="64" height="64" rx="16" fill="url(#sathi-g-mini)"/>
+            <path d="M14 30L32 16l18 14" fill="none" stroke="#f6e7c8" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 46v-8a5 5 0 0 1 10 0v8M34 46v-8a5 5 0 0 1 10 0v8" fill="none" stroke="#f6e7c8" stroke-width="3" stroke-linecap="round"/>
+            <path d="M16 46h32" stroke="#f6e7c8" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="32" cy="42" r="2.6" fill="#e9b45b"/>
+          </svg>
+        </div>
+        <span class="arrow">↗</span>
+      </div>
+      <div class="tag-row">
+        <span class="tag-pill">Product Design</span>
+        <span class="tag-pill status-concept">Concept</span>
+      </div>
+      <div>
+        <h3>SĀTHI</h3>
+        <p>A private, consent-based space where two families understand each other before the decision, not after.</p>
+      </div>
+      <span class="subdomain">sathi-waitlist.vercel.app</span>
     </a>
 
   </div>
