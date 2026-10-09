@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>oldmill.in(sathi)</title>
+<meta name="description" content="SATHI, a private pre-marriage understanding for two families.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Sans:wght@400..700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#F4ECD8; --card:#F8F2E2;
+    --ink:#241B12; --ink-soft:#5C4E3B;
+    --saffron:#DD6B12; --peacock:#0E6659; --sindoor:#AE3B26;
+    --gold:#B4841C; --turmeric:#EFB80B;
+    --line: rgba(36,27,18,0.16);
+    --f-display:'Bricolage Grotesque', sans-serif;
+    --f-body:'Instrument Sans', sans-serif;
+    --f-mono:'Space Mono', monospace;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--parchment); color:var(--ink);
+    font-family:var(--f-body); -webkit-font-smoothing:antialiased;
+    position:relative; overflow-x:hidden;
+  }
+  body::after{
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:999;
+    opacity:.05; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  a{color:inherit;}
+
+  .masthead{ width:100%; padding:clamp(20px,4vw,36px) clamp(20px,5vw,56px) 0; }
+  .wordmark{ display:flex; align-items:baseline; gap:0; width:fit-content; text-decoration:none; color:var(--ink); }
+  .word-big{ font-family:var(--f-display); font-weight:800; font-size:clamp(20px,3.4vw,26px); white-space:nowrap; line-height:1; }
+  .word-small{ font-family:var(--f-body); font-weight:400; font-size:clamp(12px,1.6vw,15px); color:var(--ink-soft); white-space:nowrap; }
+
+  main{
+    max-width:760px;
+    margin:0 auto;
+    padding:clamp(30px,6vw,56px) clamp(20px,5vw,56px) clamp(80px,10vw,120px);
+    position:relative; z-index:1;
+  }
+
+  .eyebrow{
+    font-family:var(--f-mono); font-size:12px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--saffron); margin-bottom:22px;
+  }
+
+  .tag-row{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:22px; }
+  .tag-pill{
+    font-family:var(--f-mono); font-size:10px; letter-spacing:.04em;
+    text-transform:uppercase; padding:3px 9px; border-radius:999px;
+    border:1px solid var(--line); color:var(--ink-soft); line-height:1.6;
+  }
+  .tag-pill.status-concept{ color:var(--ink-soft); border-color:var(--line); }
+
+  .logo-row{ display:flex; align-items:center; gap:18px; margin-bottom:22px; }
+
+  /* SATHI logo — exact brand mark, native colors kept as-is */
+  .sathi-logo{
+    width:64px; height:64px; border-radius:18px;
+    overflow:hidden; flex-shrink:0;
+    box-shadow:4px 4px 0 var(--ink);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .sathi-logo:hover{ transform:scale(1.05) translate(1.5px,1.5px); box-shadow:2.5px 2.5px 0 var(--ink); }
+  .sathi-logo svg{ width:100%; height:100%; display:block; }
+
+  h1{
+    font-family:var(--f-display); font-weight:700;
+    font-size:clamp(30px,6vw,48px); margin:0; line-height:1.05;
+  }
+
+  .lede{
+    font-family:var(--f-display); font-weight:500;
+    font-size:clamp(18px,2.4vw,22px); line-height:1.5;
+    color:var(--ink); margin:24px 0 0; max-width:52ch;
+  }
+
+  p.body-text{
+    font-size:15.5px; line-height:1.75; color:var(--ink-soft);
+    margin-top:18px; max-width:56ch;
+  }
+
+  .tag-list{ display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
+  .tag{
+    font-family:var(--f-mono); font-size:11px;
+    border:1px solid var(--line); border-radius:999px;
+    padding:5px 12px; color:var(--ink-soft);
+  }
+
+  /* live window */
+  .browser{
+    margin-top:40px;
+    border:2px solid var(--ink);
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:8px 8px 0 var(--line);
+  }
+  .browser-bar{
+    background:var(--card);
+    padding:10px 14px;
+    display:flex; align-items:center; gap:8px;
+    border-bottom:2px solid var(--ink);
+  }
+  .dot{ width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+  .dot.r{ background:var(--sindoor); }
+  .dot.y{ background:var(--turmeric); }
+  .dot.g{ background:var(--peacock); }
+  .browser-url{
+    margin-left:8px; flex:1;
+    font-family:var(--f-mono); font-size:12px; color:var(--ink-soft);
+    background:var(--parchment); border-radius:999px; padding:6px 14px;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    text-decoration:none;
+  }
+  .browser-url:hover{ color:var(--sindoor); }
+  .browser-viewport{
+    width:100%;
+    overflow:hidden;
+    position:relative;
+    background:#fdf6ea;
+  }
+  .browser iframe{
+    width:1280px; height:800px; border:0; display:block; background:#fdf6ea;
+    transform-origin:0 0;
+  }
+  .browser-fallback{
+    padding:10px 14px; font-family:var(--f-mono); font-size:11.5px;
+    color:var(--ink-soft); border-top:1px solid var(--line);
+  }
+  .browser-fallback a{ color:var(--sindoor); }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <a href="/" class="wordmark" aria-label="OLDMILL.in home">
+    <span class="word-big">OLDMILL</span>
+    <span class="word-small">.in</span>
+  </a>
+</header>
+
+<main>
+  <p class="eyebrow">Project</p>
+
+  <div class="tag-row">
+    <span class="tag-pill">Product Design</span>
+    <span class="tag-pill status-concept">Concept</span>
+  </div>
+
+  <div class="logo-row">
+    <div class="sathi-logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true">
+        <defs><linearGradient id="sathi-g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#8a3428"/><stop offset="1" stop-color="#5d211b"/>
+        </linearGradient></defs>
+        <rect width="64" height="64" rx="16" fill="url(#sathi-g)"/>
+        <path d="M14 30L32 16l18 14" fill="none" stroke="#f6e7c8" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M20 46v-8a5 5 0 0 1 10 0v8M34 46v-8a5 5 0 0 1 10 0v8" fill="none" stroke="#f6e7c8" stroke-width="3" stroke-linecap="round"/>
+        <path d="M16 46h32" stroke="#f6e7c8" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="32" cy="42" r="2.6" fill="#e9b45b"/>
+      </svg>
+    </div>
+  </div>
+
+  <h1>SĀTHI</h1>
+  <p class="lede">Before the yes, let two families truly meet.</p>
+
+  <p class="body-text">
+    SĀTHI is a private, mutual, consent-based space for two families who already have a match
+    in mind. It never searches, never matches, never rates. It simply helps both families
+    understand each other's hopes, expectations, and unspoken questions, before the decision
+    instead of after. Each family answers independently in its own private room, then receives
+    a shared understanding report: where they align, where they differ, and what hasn't been
+    discussed yet. No scores, no verdicts, no public profiles. The decision stays entirely
+    with the families.
+  </p>
+
+  <div class="tag-list">
+    <span class="tag">Family understanding</span>
+    <span class="tag">Consent-based</span>
+    <span class="tag">Private by default</span>
+    <span class="tag">Pre-marriage</span>
+  </div>
+
+  <div class="browser">
+    <div class="browser-bar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <a class="browser-url" href="https://sathi-waitlist.vercel.app/" target="_blank" rel="noopener">sathi-waitlist.vercel.app</a>
+    </div>
+    <div class="browser-viewport">
+      <iframe id="live-frame" src="https://sathi-waitlist.vercel.app/" loading="lazy" title="SATHI — waitlist site"></iframe>
+    </div>
+    <div class="browser-fallback">
+      Not loading? <a href="https://sathi-waitlist.vercel.app/" target="_blank" rel="noopener">open sathi-waitlist.vercel.app directly ↗</a>
+    </div>
+  </div>
+</main>
+
+<script>
+  (function(){
+    var vp = document.querySelector('.browser-viewport');
+    var frame = document.getElementById('live-frame');
+    if(!vp || !frame) return;
+    function scaleFrame(){
+      var scale = vp.clientWidth / 1280;
+      frame.style.transform = 'scale(' + scale + ')';
+      vp.style.height = (800 * scale) + 'px';
+    }
+    window.addEventListener('resize', scaleFrame);
+    window.addEventListener('load', scaleFrame);
+    scaleFrame();
+  })();
+</script>
+
+</body>
+</html>
